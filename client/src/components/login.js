@@ -16,13 +16,13 @@ function Login() {
       <input
         type="text"
         placeholder="User Name"
-        value={username} // Make inputs controlled by React state
+        value={username}
         onChange={(event) => setUsername(event.target.value)}
       />
       <input
         type="password"
         placeholder="Password"
-        value={password} // Make inputs controlled by React state
+        value={password}
         onChange={(event) => setPassword(event.target.value)}
       />
       <button onClick={login}>Login</button>
