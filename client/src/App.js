@@ -12,13 +12,20 @@ function App() {
   const client = StreamChat.getInstance(process.env.api_key);
 
   if (token) {
-    client.connectUser({
-      id: cookies.get("userID"),
-      name: cookies.get("username"),
-      firstName: cookies.get("firstName"),
-      lastName: cookies.get("lastName"),
-      hashedPassword: cookies.get("hashedpassword"),
-    });
+    client
+      .connectUser(
+        {
+          id: cookies.get("userID"),
+          name: cookies.get("username"),
+          firstName: cookies.get("firstName"),
+          lastName: cookies.get("lastName"),
+          hashedPassword: cookies.get("hashedpassword"),
+        },
+        token
+      )
+      .then((user) => {
+        console.log(user);
+      });
   }
   return (
     <div className="App">

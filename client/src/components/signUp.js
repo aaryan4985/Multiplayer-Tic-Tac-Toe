@@ -1,25 +1,27 @@
-import React, { useState, useSyncExternalStore } from "react";
+import React, { useState } from "react";
 import Axios from "axios";
 import Cookies from "universal-cookie";
 
-function SignUp() {
+function SignUp({ setIsAuth }) {
   const cookies = new Cookies();
   const [user, setUser] = useState(null);
+
   const signUp = () => {
     Axios.post("http://localhost:3001/signup", user).then((res) => {
-      const { token, userID, firstName, lastName, username, hashedPassword } =
-        res.data();
+      const { token, userId, firstName, lastName, username, hashedPassword } =
+        res.data;
       cookies.set("token", token);
-      cookies.set("userID", userID);
+      cookies.set("userId", userId);
+      cookies.set("username", username);
       cookies.set("firstName", firstName);
       cookies.set("lastName", lastName);
-      cookies.set("username", username);
       cookies.set("hashedPassword", hashedPassword);
+      setIsAuth(true);
     });
   };
   return (
     <div className="signUp">
-      <label>Sign up</label>
+      <label> Sign Up</label>
       <input
         placeholder="First Name"
         onChange={(event) => {
@@ -33,18 +35,19 @@ function SignUp() {
         }}
       />
       <input
-        placeholder="User Name"
+        placeholder="Username"
         onChange={(event) => {
-          setUser({ ...user, userName: event.target.value });
+          setUser({ ...user, username: event.target.value });
         }}
       />
       <input
         placeholder="Password"
+        type="password"
         onChange={(event) => {
           setUser({ ...user, password: event.target.value });
         }}
       />
-      <button onClick={signUp}>Sign Up</button>
+      <button onClick={signUp}> Sign Up</button>
     </div>
   );
 }
