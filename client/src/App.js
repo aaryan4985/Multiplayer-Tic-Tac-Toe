@@ -1,36 +1,58 @@
 import "./App.css";
-import dotenv from "dotenv";
-import Cookies from "universal-cookie";
-import SignUp from "./components/signUp";
 import Login from "./components/login";
+import SignUp from "./components/SignUp";
 import { StreamChat } from "stream-chat";
+import { Chat } from "stream-chat-react";
+import Cookies from "universal-cookie";
+import { useState } from "react";
 
 function App() {
-  dotenv.config();
+  const api_key = "//API_KEY";
   const cookies = new Cookies();
   const token = cookies.get("token");
-  const client = StreamChat.getInstance(process.env.api_key);
+  const client = StreamChat.getInstance(api_key);
+  const [isAuth, setIsAuth] = useState(false);
+
+  const logOut = () => {
+    cookies.remove("token");
+    cookies.remove("userId");
+    cookies.remove("firstName");
+    cookies.remove("lastName");
+    cookies.remove("hashedPassword");
+    cookies.remove("channelName");
+    cookies.remove("username");
+    client.disconnectUser();
+    setIsAuth(false);
+  };
 
   if (token) {
     client
       .connectUser(
         {
-          id: cookies.get("userID"),
+          id: cookies.get("userId"),
           name: cookies.get("username"),
           firstName: cookies.get("firstName"),
           lastName: cookies.get("lastName"),
-          hashedPassword: cookies.get("hashedpassword"),
+          hashedPassword: cookies.get("hashedPassword"),
         },
         token
       )
       .then((user) => {
-        console.log(user);
+        setIsAuth(true);
       });
   }
   return (
     <div className="App">
-      <SignUp />
-      <Login />
+      {isAuth ? (
+        <Chat client={client}>
+          <button onClick={logOut}> Log Out</button>
+        </Chat>
+      ) : (
+        <>
+          <SignUp setIsAuth={setIsAuth} />
+          <Login setIsAuth={setIsAuth} />
+        </>
+      )}
     </div>
   );
 }
