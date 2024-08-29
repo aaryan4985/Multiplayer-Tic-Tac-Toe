@@ -1,6 +1,6 @@
 import React from "react";
 
-function square(chooseSquare, val) {
+function Square({ chooseSquare, val }) {
   return (
     <div className="square" onClick={chooseSquare}>
       {val}
@@ -8,4 +8,4 @@ function square(chooseSquare, val) {
   );
 }
 
-export default square;
+export default Square;
