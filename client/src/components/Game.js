@@ -4,6 +4,7 @@ function Game(channel) {
   const [playersJoined, setPlayersJoined] = useState(
     channel.this.state.watcher_count === 2
   );
+  const [result, setResult] = useState({ winner: "none", state: "none" });
   channel.on("user.watching.start", (event) => {
     setPlayersJoined(event.watcher_count === 2);
   });
@@ -12,7 +13,7 @@ function Game(channel) {
   }
   return (
     <div className="gameContainer">
-      <Board />
+      <Board result={result} setResult={setResult} />
     </div>
   );
 }
