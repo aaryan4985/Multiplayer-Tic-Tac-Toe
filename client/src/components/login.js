@@ -23,7 +23,7 @@ function Login({ setIsAuth }) {
   };
   return (
     <div className="login">
-      <label> Login</label>
+      <label id="login"> Login</label>
 
       <input
         placeholder="Username"

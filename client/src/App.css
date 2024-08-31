@@ -1,102 +1,163 @@
-.App {
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #76a2ff;
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --primary-color: #3498db;
+  --secondary-color: #2ecc71;
+  --background-color: #f0f2f5;
+  --text-color: #333;
+  --input-bg: #fff;
+  --input-border: #ddd;
+  --button-hover: #2980b9;
+  --shadow-color: rgba(0, 0, 0, 0.1);
 }
 
 body {
-  padding: 0;
+  font-family: 'Poppins', sans-serif;
+  background-color: var(--background-color);
   margin: 0;
-}
-
-.login,
-.signUp {
+  padding: 0;
   display: flex;
-  flex-direction: column;
-  margin: 20px;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #3498db, #8e44ad);
 }
 
-.login input,
-.signUp input {
-  margin: 10px;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  width: 300px;
-  height: 30px;
-}
-
-.login button,
-.signUp button {
-  margin: 10px;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  width: 320px;
-  height: 30px;
-  cursor: pointer;
-}
-
-.login label,
-.signUp label {
-  text-align: center;
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 20px;
-  color: white;
-}
-
-.board {
-  width: 500px;
-  height: 500px;
-  background-color: rgb(252, 252, 252);
-  border: 1px solid black;
+.container {
   display: flex;
-  flex-direction: column;
-}
-
-.row {
-  flex: 33%;
-  display: flex;
+  background-color: rgba(255, 255, 255, 0.95);
+  border-radius: 20px;
+  box-shadow: 0 10px 30px var(--shadow-color);
+  overflow: hidden;
+  width: 850px;
+  max-width: 90%;
   flex-direction: row;
+  transition: all 0.3s ease-in-out;
 }
 
-.square {
-  flex: 33%;
-  height: 100%;
-  border: 1px solid black;
-  cursor: pointer;
-  display: grid;
-  place-items: center;
-  font-size: 30px;
-  color: black;
-  font-family: Arial, Helvetica, sans-serif;
+.container:hover {
+  box-shadow: 0 15px 40px var(--shadow-color);
 }
 
-.square:active {
-  background-color: lightgray;
-}
-
-h4 {
-  font-family: Arial, Helvetica, sans-serif;
+.title-container {
+  width: 100%;
+  background-color: var(--primary-color);
   color: white;
-  font-size: 30px;
+  text-align: center;
+  padding: 20px;
+  font-size: 26px;
+  font-weight: 700;
+  position: absolute;
+  top: -50px;
+  border-radius: 20px 20px 0 0;
+  box-shadow: 0 5px 15px var(--shadow-color);
 }
 
-.joinGame input {
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  width: 220px;
-  height: 30px;
+.signup-container {
+  flex: 1;
+  background-color: var(--secondary-color);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+  text-align: center;
+  border-radius: 0 0 0 20px;
 }
-.joinGame button {
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  width: 220px;
-  height: 51px;
+
+.signup-container h2 {
+  color: white;
+  margin-bottom: 20px;
+}
+
+.signup-container p {
+  margin-bottom: 20px;
+  font-size: 14px;
+}
+
+.signup-container button {
+  background-color: transparent;
+  border: 2px solid white;
+  color: white;
+  padding: 12px 25px;
+  border-radius: 8px;
+  font-size: 16px;
   cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.signup-container button:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.form-container {
+  flex: 1;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+h2 {
+  color: var(--primary-color);
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 300px;
+}
+
+input {
+  margin-bottom: 15px;
+  padding: 12px 15px;
+  border: 1px solid var(--input-border);
+  border-radius: 8px;
+  font-size: 14px;
+  transition: border-color 0.3s ease;
+}
+
+input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 8px rgba(52, 152, 219, 0.3);
+}
+
+button {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 100%;
+}
+
+button:hover {
+  background-color: var(--button-hover);
+}
+
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+    width: 100%;
+    max-width: 95%;
+  }
+  
+  .signup-container, .form-container {
+    width: 100%;
+    padding: 30px;
+  }
+  
+  .title-container {
+    padding: 15px;
+    font-size: 22px;
+  }
 }
